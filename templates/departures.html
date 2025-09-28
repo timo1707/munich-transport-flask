@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Departures - Munich Transport</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .departure-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .line-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: white;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .subway { background-color: #0066cc; }
+        .sbahn { background-color: #00aa44; }
+        .tram { background-color: #cc6600; }
+        .bus { background-color: #cc0066; }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0066cc;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link">← Back to Home</a>
+        <h1>Departures from {{ station_name }}</h1>
+        
+        {% if departures %}
+            {% for departure in departures %}
+            <div class="departure-item">
+                <div>
+                    <span class="line-badge {{ departure.type }}">{{ departure.line }}</span>
+                    <span>{{ departure.destination }}</span>
+                </div>
+                <strong>{{ departure.departure }}</strong>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>No departures found for this station.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
